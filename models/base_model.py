@@ -10,12 +10,25 @@ class BaseModel():
     """Base class defines all common attributes and methods for other classes
     """
 
-    def __init__(self, id=None, created_at=None, updated_at=None):
-        """Initializes instance attributes."""
+    def __init__(self, *args, **kwargs):
+        """Initializes instance attributes.
 
+        Args: 
+            *args (any): Unused.
+            **kwargs (dict): Key/value pairs of attributes.
+        """
+        tform = "%Y-%m-%dT%H:%M:%S.%f"
         self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
+        if len(kwargs) != 0:
+            for k, v in kwargs.items():
+                if k == "created_at" or k == "updated_at":
+                    self.__dict__[k] = datetime.strptime(v, tform)
+                else:
+                    self.__dict__[k] = v
+        else:
+            models.storage.new(self)
 
     def __str__(self):
         """Return the print/str representation of the BaseModel instance."""
