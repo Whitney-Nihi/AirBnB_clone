@@ -3,7 +3,8 @@
 
 
 def sum(arg):
-    """Function sums up a list or tuple of numbers"""
+    """Function sums up a list or tuple of numbers
+    """
     num = 0
     for val in arg:
         num += val
