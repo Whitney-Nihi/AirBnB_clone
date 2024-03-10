@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Defines a Base Class for other sub-classes"""
 
+import models
 from datetime import datetime
 from uuid import uuid4
 
