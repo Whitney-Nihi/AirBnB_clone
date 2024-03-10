@@ -6,7 +6,7 @@ from datetime import datetime
 from uuid import uuid4
 
 
-class BaseModel():
+class BaseModel:
     """Base class defines all common attributes and methods for other classes
     """
 
@@ -39,7 +39,7 @@ class BaseModel():
         """updates updated_at with current datetime"""
 
         self.updated_at = datetime.now()
-        models.storage.save()
+        model.storage.save()
 
     def to_dict(self):
         """returns keys/values of __dict__ of instance.
