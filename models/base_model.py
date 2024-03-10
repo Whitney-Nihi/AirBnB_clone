@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Defines a Base Class for other sub-classes"""
 
-import models
 from datetime import datetime
 from uuid import uuid4
 
@@ -18,8 +17,6 @@ class BaseModel:
             **kwargs (dict): Key/value pairs of attributes.
         """
         tform = "%Y-%m-%dT%H:%M:%S.%f"
-        self.id = str(uuid4())
-        self.created_at = datetime.today()
         self.updated_at = datetime.today()
         if len(kwargs) != 0:
             for k, v in kwargs.items():
@@ -28,7 +25,8 @@ class BaseModel:
                 else:
                     self.__dict__[k] = v
         else:
-            models.storage.new(self)
+            self.id = str(uuid4())
+            self.created_at = datetime.today()
 
     def __str__(self):
         """Return the print/str representation of the BaseModel instance."""
@@ -39,7 +37,6 @@ class BaseModel:
         """updates updated_at with current datetime"""
 
         self.updated_at = datetime.today()
-        model.storage.save()
 
     def to_dict(self):
         """returns keys/values of __dict__ of instance.
