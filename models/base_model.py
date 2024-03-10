@@ -25,8 +25,7 @@ class BaseModel:
                 else:
                     self.__dict__[k] = v
         else:
-            self.id = str(uuid4())
-            self.created_at = datetime.today()
+            models.storage.new(self)
 
     def __str__(self):
         """Return the print/str representation of the BaseModel instance."""
@@ -37,6 +36,7 @@ class BaseModel:
         """updates updated_at with current datetime"""
 
         self.updated_at = datetime.today()
+        models.storage.save()
 
     def to_dict(self):
         """returns keys/values of __dict__ of instance.
